@@ -1,0 +1,30 @@
+- var myTitle = "NCU Course Finder"
+- var myURL = "https://path/to/your/webpage"
+- var analyticsScript = "https://path/to/your/analytics.js"
+
+doctype html
+html
+  head
+    //- UTF-8
+    meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+    meta(http-equiv="Cache-Control",content="no-cache")
+    meta(name="viewport",content="width=device-width, initial-scale=1")
+    //- Open Graph protocol
+    meta(property="og:title",content=`${myTitle}`)
+    meta(property="og:type",content="website")
+    meta(property="og:url",content=`${myURL}`)
+    //- Google Analytics
+    script(src=`${analyticsScript}`)
+    //- Webpack bundle
+    //- since the HtmlWebpackPlugin generate the html and insert bundle.js
+    //- we can't put the bundle.js script here otherwise it'll be include twice!
+    //- script(src="./bundle.js")
+    title= myTitle
+  body
+    div#ldiv
+      include ldiv.pug
+      +ldiv
+    div#rdiv
+      include rdiv.pug
+      +rdiv
+    div#disclaimer(style='display: hidden;')

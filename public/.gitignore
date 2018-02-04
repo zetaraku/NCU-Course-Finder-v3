@@ -1,0 +1,4 @@
+#data/info/**
+data/dynamic/**
+analytics.js
+!.gitkeep

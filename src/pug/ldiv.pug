@@ -1,0 +1,161 @@
+mixin ldiv
+  table#searching_table(cellspacing='1',cellpadding='5')
+    tr
+      td#my_title(colspan='4',style='cursor: pointer;')= myTitle
+    tr
+      td.center(colspan='4')
+        button.startSearch.btn.btn-default(disabled)
+          | 開始多重篩選
+    tr
+      td.left(style='min-width: 100px;') 選課相關資訊
+      td.right(style='min-width: 300px;',colspan='3')
+        span#announcement
+          | N/A
+    tr
+      td.left(style='min-width: 100px;') 資料更新日期
+      td.right(style='min-width: 300px;',colspan='3')
+        span#datatime
+          | N/A
+    tr
+      td.left 學院/系別
+      td.right(colspan='3')
+        span
+          select.form-control#colesel
+        span#deptdiv
+    tr
+      td.left
+        | 課程名稱
+        abbr(title="請以空白分隔，取反請在前面加上!(驚嘆號)，支援正規表達式")
+          small
+            | [?]
+      td.right(colspan='3')
+        div#search_name
+          input.form-control(style='float: left; width: calc(100% - 160px);',type='text',placeholder='請輸入關鍵字')
+          div(style='float: left; margin-left: 10px;')
+            label.radio-inline
+              input(type='radio',name='name_opt',value='and',checked='')
+              | AND
+            label.radio-inline
+              input(type='radio',name='name_opt',value='or')
+              | OR
+    tr
+      td.left
+        | 導師名稱
+        abbr(title="請以空白分隔，支援正規表達式，NOR為反向選擇")
+          small
+            | [?]
+      td.right(colspan='3')
+        div#search_teacher
+          input.form-control(style='float: left; width: calc(100% - 160px);',type='text',placeholder='請輸入關鍵字')
+          div(style='float: left; margin-left: 10px;')
+            label.radio-inline
+              input(type='radio',name='teacher_opt',value='or',checked='')
+              | OR
+            label.radio-inline
+              input(type='radio',name='teacher_opt',value='nor')
+              | NOR
+    tr
+      td.left 學分數
+      td.right(colspan='3')
+        div#filter_credit
+          each val in [0,1,2,3,4]
+            label.checkbox-inline
+              input(type='checkbox',name='credit',value=`${val}`,checked='')
+              | #{val} &nbsp;
+    tr
+      td.left 必修/選修
+      td.right(colspan='3')
+        div#filter_require
+          label.radio-inline
+            input(type='radio',name='type',value='',checked='')
+            | 不篩選
+          label
+            | ｜
+          label.radio-inline
+            input(type='radio',name='type',value='required')
+            | 必修
+          label.radio-inline
+            input(type='radio',name='type',value='elective')
+            | 選修
+    tr
+      td.left
+        | 類別篩選
+        abbr(title="請注意！建議先將[學院/系別]設定為[不指定]，同時篩選[學院/系別]和[類別]可能會找不到結果！")
+          small
+            | [?]
+      td.right(colspan='3')
+        select.form-control#filter_category
+          option(value='',selected)
+            | [不篩選]
+    tr
+      td.left 密碼卡
+      td.right(colspan='3')
+        div#filter_pwcard
+          label.radio-inline
+            input(type='radio',name='passwordCard',value='',checked='')
+            | 不篩選
+          label
+            | ｜
+          label.radio-inline
+            input(type='radio',name='passwordCard',value='none')
+            | 不使用
+          label.radio-inline
+            input(type='radio',name='passwordCard',value='optional')
+            | 可使用
+          label.radio-inline
+            input(type='radio',name='passwordCard',value='all')
+            | 必須
+    tr
+      td.left 上課時段
+      td.right(colspan='3')
+        div#filter_schedule
+          div(style='clear: left;')
+            | 過濾方法:
+            div.radio
+              label
+                input(type='radio',name='filter_mode',value='',checked='')
+                | 全部 (不過濾)
+            div.radio
+              label
+                input(type='radio',name='filter_mode',value='include')
+                | 包含<b>選取時段</b>的項目
+            div.radio
+              label
+                input(type='radio',name='filter_mode',value='enclose')
+                | 限定<b>選取時段</b>的項目
+            div.radio
+              label
+                input(type='radio',name='filter_mode',value='exclude')
+                | 不含<b>選取時段</b>的項目
+          table#schedule_table(style='display: none;')
+            thead
+            tbody
+    tr
+      td.left 進階篩選
+      td.right(colspan='3')
+        div#extra_options
+          div.checkbox
+            label
+              input(type='checkbox',name="extra",value='isNotFull')
+              | 不搜尋目前已額滿的課程
+    tr
+      td.left(colspan='1')
+        | 搜尋連結
+        abbr(title="複製本連結之後，下次使用可以自動填入目前的搜尋條件，也可以分享給別人！")
+          small
+            | [?]
+      td.right(colspan='3')
+        div.input-group
+          input.form-control(type="text",id="share_link",value="N/A",aria-label="...")
+          div.input-group-btn
+            button.btn.btn-default.clipboard-btn(data-clipboard-target="#share_link")
+              | 複製
+    tr
+      //- Do not remove
+      td(colspan='4')#my_footer
+        | Made by <a href='https://github.com/zetaraku/'>Raku Zeta</a>,
+        | licensed under the <a href='https://en.wikipedia.org/wiki/MIT_License'>MIT</a> license
+    tr
+      td.center(colspan='4')
+        small
+          | Internet Explorer &amp; Microsoft Edge are NOT recommended for this site. (really slow)

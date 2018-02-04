@@ -1,0 +1,12 @@
+[
+	"college", "department",
+	"coursenames", "coursename_opt",
+	"teachers", "teacher_opt",
+	"credits",
+	"reqtype",
+	"category",
+	"pwcard",
+	"semester",
+	"schedule_periods", "schedule_opts",
+	"extra_opts"
+]

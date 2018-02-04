@@ -1,0 +1,35 @@
+mixin rdiv
+  include tspager.pug
+  table.tablesorter#result_table
+    thead
+      tr#result_head
+        th.c_no
+          | 課號
+          small
+            | /序號
+        th.c_name
+          | 課程名稱
+        th.c_teacher
+          | 導師
+        th.c_sr
+          | 選/必
+        th.c_credit
+          | 學分
+        th.c_rw.countval
+          | 餘額/待選
+        th.c_succrate.countval
+          | 中選率
+          abbr(title="※注意：此為待選者的粗估當前中選率，並沒有將志願序列入考慮，僅作為參考用，實際機率會依各學生的志願序而有不同。")
+            small
+              | [?]
+        th.c_al.countval
+          | 已選/總額
+        th.c_fullrate.countval
+          | 飽和度
+        th.c_timevals.timevals
+          | 上課時段
+    tbody
+    tfoot
+      tr
+        th#result_alert(style='text-align: center; display: none;',colspan='10')
+  include tspager.pug
