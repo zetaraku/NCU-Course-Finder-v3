@@ -98,14 +98,14 @@ $(document).ready(() => {
 		);
 
 		function toggleDay(d) {
-			for(let h of HOUR_IDS)
-				CE['schedule_periods'].filter(`[value="${d}-${h}"]`).prop('checked', (i, val) => !val);
-
+			CE['schedule_periods']
+				.filter((i, e) => e.value.startsWith(d))
+				.prop('checked', (i, val) => !val);
 		}
 		function toggleHour(h) {
-			console.log('th');
-			for(let d of DAY_IDS)
-				CE['schedule_periods'].filter(`[value="${d}-${h}"]`).prop('checked', (i, val) => !val);
+			CE['schedule_periods']
+				.filter((i, e) => e.value.endsWith(h))
+				.prop('checked', (i, val) => !val);
 		}
 	}
 	function initTableSorter() {
@@ -163,21 +163,26 @@ $(document).ready(() => {
 			);
 		} catch(e) {
 			$('#datatime').html('<font color="red">無法取得資料</font>');
-			console.log(e);
+			console.error(e);
 		}
 
 		function preprocessCourseData(course_data) {
 			Object.values(course_data).forEach((course) => {
 				course.remainCnt = course.limitCnt - course.admitCnt;
-				course.successRate = (course.waitCnt ?
-					Math.floor(1000 * course.remainCnt / course.waitCnt) / 10 :
-					course.remainCnt ? Infinity : 0
-				);
-				course.fullRate = (course.limitCnt ?
-					Math.floor(1000 * course.admitCnt / course.limitCnt) / 10 :
-					course.admitCnt ? Infinity : 0
-				);
+				course.successRate = getRate(course.remainCnt, course.waitCnt);
+				course.fullRate = getRate(course.admitCnt, course.limitCnt);
 			});
+
+			function getRate(n, d) {
+				// if(!d) {
+				// 	if(!n)
+				// 		return 0;
+				// 	else
+				// 		return Infinity;
+				// }
+
+				return Math.floor(1000 * n / d) / 10;
+			}
 		}
 	}
 	function initDepartmentSelection() {
