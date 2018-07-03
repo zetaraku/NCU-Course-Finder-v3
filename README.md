@@ -1,4 +1,6 @@
 # NCU-Course-Finder
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder?ref=badge_shield)
+
 
 A rescue from the place where Nobody Care U.
 
@@ -49,3 +51,7 @@ License
 -------
 
 Copyright © 2017, Raku Zeta. Licensed under the MIT license.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder?ref=badge_large)
