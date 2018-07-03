@@ -1,6 +1,12 @@
 # NCU-Course-Finder
+[![Maintainability](https://api.codeclimate.com/v1/badges/348be8f57877ddbbf86d/maintainability)](https://codeclimate.com/github/zetaraku/NCU-Course-Finder/maintainability)
 
 A rescue from the place where Nobody Care U.
+
+Demo
+----
+
+[DEMO PAGE](https://ncucf.herokuapp.com/)
 
 Introduction
 ------------
