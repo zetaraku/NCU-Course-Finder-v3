@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const course_info_page = 'https://course.ncu.edu.tw/Course/main/support/courseDetail.html';
+const course_info_page = 'https://cis.ncu.edu.tw/Course/main/support/courseDetail.html';
 const partition_size = 42;
 
 export default function makeCourseRows(courses, onProgress, onFinished) {
