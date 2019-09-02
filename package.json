@@ -8,8 +8,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
-		"postinstall": "npm run wp",
 		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack --config webpack.config.js",
 		"wp": "webpack --config webpack.config.js --progress --colors",
 		"wp-devs": "webpack-dev-server --devtool eval --colors --open --watch-content-base"
 	},
