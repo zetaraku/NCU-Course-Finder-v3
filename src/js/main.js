@@ -17,8 +17,8 @@ import filter_category from '../static_data/filter_category.json';
 import filter_options from '../static_data/filter_options.json';
 import '../scss/style.scss';
 
-import { urlPrefix } from './_settings'
-const getUrl = (relpath) => urlPrefix + relpath + `?ts=${moment().valueOf()}`;
+const data_remote_host = 'https://path/to/your/data/host/';
+const getUrl = (relpath) => data_remote_host + relpath + `?ts=${moment().valueOf()}`;
 
 const urls = {
 	announcement: getUrl('data/info/announcement.txt'),
