@@ -58,6 +58,9 @@ export default function filterCoursesByQuery(courses, query) {
 		);
 	}
 	if(query.schedule_opts) {
+		if(query.schedule_periods === undefined)
+			query.schedule_periods = [];
+
 		if(query.schedule_opts === 'include') {
 			results = results.filter((course) =>
 				course.times.some((hour) =>

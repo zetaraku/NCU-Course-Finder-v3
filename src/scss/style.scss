@@ -1,3 +1,5 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
 * {
 	font-size: 16px;
 	box-sizing: border-box;
@@ -123,7 +125,7 @@ td {
 	margin: 20px 0px;
 }
 
-.label-yellow-warning {
+.badge-yellow-warning {
 	color: lightgray;
 	background-color: yellow;
 }
@@ -136,7 +138,7 @@ td {
 	min-width: 150px;
 }
 .c_teacher {
-	min-width: 55px;
+	min-width: 65px;
 	width: 65px;
 }
 .c_sr {

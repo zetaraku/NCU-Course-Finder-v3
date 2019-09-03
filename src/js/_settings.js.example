@@ -1,0 +1,4 @@
+const proxy_url = 'https://cors-anywhere.herokuapp.com/';
+const data_server_url = 'https://path/to/your/data/server/';
+export const urlPrefix = proxy_url + data_server_url;
+// export const urlPrefix = './';

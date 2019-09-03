@@ -4,7 +4,7 @@ mixin ldiv
       td#my_title(colspan='4',style='cursor: pointer;')= myTitle
     tr
       td.center(colspan='4')
-        button.startSearch.btn.btn-default(disabled)
+        button.startSearch.btn.btn-light(disabled)
           | 開始多重篩選
     tr
       td.left(style='min-width: 100px;') 選課相關資訊
@@ -34,10 +34,10 @@ mixin ldiv
           div(style='float: left; margin-left: 10px;')
             label.radio-inline
               input(type='radio',name='name_opt',value='and',checked='')
-              | AND
+              | &nbsp;AND&nbsp;
             label.radio-inline
               input(type='radio',name='name_opt',value='or')
-              | OR
+              | &nbsp;OR&nbsp;
     tr
       td.left
         | 導師名稱
@@ -50,10 +50,10 @@ mixin ldiv
           div(style='float: left; margin-left: 10px;')
             label.radio-inline
               input(type='radio',name='teacher_opt',value='or',checked='')
-              | OR
+              | &nbsp;OR&nbsp;
             label.radio-inline
               input(type='radio',name='teacher_opt',value='nor')
-              | NOR
+              | &nbsp;NOR&nbsp;
     tr
       td.left 學分數
       td.right(colspan='3')
@@ -61,22 +61,22 @@ mixin ldiv
           each val in [0,1,2,3,4]
             label.checkbox-inline
               input(type='checkbox',name='credit',value=`${val}`,checked='')
-              | #{val} &nbsp;
+              | &nbsp; #{val} &nbsp;
     tr
       td.left 必修/選修
       td.right(colspan='3')
         div#filter_require
           label.radio-inline
             input(type='radio',name='type',value='',checked='')
-            | 不篩選
+            | &nbsp;不篩選&nbsp;
           label
             | ｜
           label.radio-inline
             input(type='radio',name='type',value='required')
-            | 必修
+            | &nbsp;必修&nbsp;
           label.radio-inline
             input(type='radio',name='type',value='elective')
-            | 選修
+            | &nbsp;選修&nbsp;
     tr
       td.left
         | 類別篩選
@@ -93,40 +93,40 @@ mixin ldiv
         div#filter_pwcard
           label.radio-inline
             input(type='radio',name='passwordCard',value='',checked='')
-            | 不篩選
+            | &nbsp;不篩選&nbsp;
           label
             | ｜
           label.radio-inline
             input(type='radio',name='passwordCard',value='none')
-            | 不使用
+            | &nbsp;不使用&nbsp;
           label.radio-inline
             input(type='radio',name='passwordCard',value='optional')
-            | 可使用
+            | &nbsp;部份使用&nbsp;
           label.radio-inline
             input(type='radio',name='passwordCard',value='all')
-            | 必須
+            | &nbsp;全部使用&nbsp;
     tr
       td.left 上課時段
       td.right(colspan='3')
         div#filter_schedule
           div(style='clear: left;')
-            | 過濾方法:
+            | 過濾方法：
             div.radio
               label
                 input(type='radio',name='filter_mode',value='',checked='')
-                | 全部 (不過濾)
+                | &nbsp;全部 (不過濾)&nbsp;
             div.radio
               label
                 input(type='radio',name='filter_mode',value='include')
-                | 包含<b>選取時段</b>的項目
+                | &nbsp;包含<b>選取時段</b>的項目&nbsp;
             div.radio
               label
                 input(type='radio',name='filter_mode',value='enclose')
-                | 限定<b>選取時段</b>的項目
+                | &nbsp;限定<b>選取時段</b>的項目&nbsp;
             div.radio
               label
                 input(type='radio',name='filter_mode',value='exclude')
-                | 不含<b>選取時段</b>的項目
+                | &nbsp;不含<b>選取時段</b>的項目&nbsp;
           table#schedule_table(style='display: none;')
             thead
             tbody
@@ -137,7 +137,7 @@ mixin ldiv
           div.checkbox
             label
               input(type='checkbox',name="extra",value='isNotFull')
-              | 不搜尋目前已額滿的課程
+              | &nbsp;不搜尋目前已額滿的課程&nbsp;
     tr
       td.left(colspan='1')
         | 搜尋連結
@@ -148,7 +148,7 @@ mixin ldiv
         div.input-group
           input.form-control(type="text",id="share_link",value="N/A",aria-label="...")
           div.input-group-btn
-            button.btn.btn-default.clipboard-btn(data-clipboard-target="#share_link")
+            button.btn.btn-light.clipboard-btn(data-clipboard-target="#share_link")
               | 複製
     tr
       //- Do not remove

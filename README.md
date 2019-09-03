@@ -29,10 +29,12 @@ You must have installed [Node.js](https://nodejs.org/).
 
 Then, use `npm install` in this directory to install all required dependencies.
 
+Edit all the `*.example` files as you need and remove the `.example` suffix.
+
 Developing
 ----------------
 
-Use `npm run wp-devs` to start the webpack-dev-server for development.
+Use `npm run dev` to start the webpack-dev-server for development.
 
 webpack-dev-server will watch your files and reload the page automatically.
 
@@ -41,7 +43,7 @@ Deploying
 
 When you're ready to serve the website,
 
-use `npm run wp` to generate the actual production files into `dist/`.
+use `npm run build` to generate the actual production files into `dist/`.
 
 The bundler only generate two files: `index.html` and `bundle.js`.
 
