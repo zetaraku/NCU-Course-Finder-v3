@@ -39,7 +39,8 @@ export default function filterCoursesByQuery(courses, query) {
 	}
 	if(query.credits) {
 		results = results.filter((course) =>
-			query.credits.includes(course.credit)
+			query.credits.includes(''+course.credit)
+			|| query.credits.includes('4+') && course.credit >= 4
 		);
 	}
 	if(query.reqtype) {

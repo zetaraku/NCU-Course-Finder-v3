@@ -58,7 +58,7 @@ mixin ldiv
       td.left 學分數
       td.right(colspan='3')
         div#filter_credit
-          each val in [0,1,2,3,4]
+          each val in ['0','1','2','3','4+']
             label.checkbox-inline
               input(type='checkbox',name='credit',value=`${val}`,checked='')
               | &nbsp; #{val} &nbsp;
