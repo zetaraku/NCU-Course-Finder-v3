@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: './src/js/main.js',
+	entry: ['@babel/polyfill', 'bootstrap-loader', './src/js/main.js'],
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		filename: 'bundle.js',
@@ -73,11 +73,7 @@ module.exports = {
 			{
 				test: /\.html$/,
 				loader: 'html-loader'
-			},
-			{
-				test: /\.json$/,
-				loader: 'json-loader'
-			},
+			}
 		]
 	}
 };

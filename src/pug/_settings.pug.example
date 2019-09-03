@@ -1,0 +1,3 @@
+- var myTitle = "NCU Course Finder"
+- var myURL = "https://path/to/this/website"
+- var analyticsScript = "https://path/to/your/analytics.js"

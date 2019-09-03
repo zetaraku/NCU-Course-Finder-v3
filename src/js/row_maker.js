@@ -76,22 +76,22 @@ function makeNameTD(course) {
 }
 function getTypeTag(course) {
 	if(/^CC/.test(course.classNo))
-		return '<span class="label label-sm label-primary">核心通識</span>';
+		return '<span class="badge badge-primary">核心通識</span>';
 	if(/^GS/.test(course.classNo))
-		return '<span class="label label-sm label-success">一般通識</span>';
+		return '<span class="badge badge-success">一般通識</span>';
 	if(course.type === 'required')
-		return '<span class="label label-md label-primary">必修</span>';
+		return '<span class="badge badge-primary">必修</span>';
 	if(course.type === 'elective')
-		return '<span class="label label-md label-success">選修</span>';
+		return '<span class="badge badge-success">選修</span>';
 
-	return '<span class="label label-md label-warning">N/A</span>';
+	return '<span class="badge badge-secondary">無資料</span>';
 }
 function makeInfoBadge(course) {
 	let infobadge = $('<div class="hovered-badge" style="right: 0; background-color: #22222222; position: absolute;"></div>');
 
 	if(course.passwordCard === 'all')
-		infobadge.append('<span class="label label-yellow-warning" title="需要密碼卡">' +
-			'<span class="small glyphicon glyphicon-lock" />' +
+		infobadge.append('<span class="badge badge-yellow-warning" title="需要密碼卡">' +
+			'🔐' +
 		'</span>');
 
 	return infobadge;

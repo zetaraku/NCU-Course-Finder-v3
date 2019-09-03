@@ -1,8 +1,5 @@
 import $ from 'jquery';
 import 'bootstrap';
-import 'bootstrap-loader';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
 import 'jquery-ui/ui/widgets/dialog';
 import 'jquery-ui/themes/base/all.css';
 import 'tablesorter';
@@ -20,10 +17,7 @@ import filter_category from '../static_data/filter_category.json';
 import filter_options from '../static_data/filter_options.json';
 import '../scss/style.scss';
 
-const proxy = 'https://cors-anywhere.herokuapp.com/';
-const data_server = 'https://path/to/your/data/server/';
-// const urlPrefix = proxy + data_server;
-const urlPrefix = './';
+import { urlPrefix } from './_settings'
 const getUrl = (relpath) => urlPrefix + relpath + `?ts=${moment().valueOf()}`;
 
 const urls = {
