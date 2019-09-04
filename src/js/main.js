@@ -347,7 +347,7 @@ function doQuery() {
 		$('.startSearch').prop('disabled', false);
 	});
 
-	function refreshResultAlert(result_alert) {
+	function refreshResultAlert() {
 		result_alert.hide();
 		if(result_courses.length >= 1000) {
 			result_alert.css('background-color', 'orange')
