@@ -32,7 +32,6 @@ const HOUR_IDS = [1, 2, 3, 4, 'Z', 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D'];
 
 // Cached jQueryElements, ValueSupplier, ValueConsumer, ValueResetter, ValueToString
 let CE, VS, VC, VR, VTS;
-let deptsels;
 
 let COURSE_DATA;
 let department_tree;
@@ -52,7 +51,6 @@ async function init() {
 	initFilterCategory();
 	initUI();
 	applyHashQuery();
-	enableSearching();
 }
 
 function initScheduleTable() {
@@ -105,7 +103,7 @@ function initScheduleTable() {
 }
 
 function initJQueryWrappers() {
-	( { CE, VS, VC, VR, VTS, deptsels } = getJQueryWrappers($) );
+	( { CE, VS, VC, VR, VTS } = getJQueryWrappers($) );
 }
 
 function initTableSorter() {
@@ -118,6 +116,7 @@ function initTableSorter() {
 			if(n === 'null') return '-9e9';
 			return n;
 		},
+		parsed: false,
 		type: 'numeric',	// set type, either numeric or text
 	});
 	$('#result_table')
@@ -193,7 +192,7 @@ function initDepartmentSelection() {
 	let colesel$ = $('#colesel'); {
 		colesel$.append('<option value="">[不指定]</option>');
 	}
-	deptsels[''] = $('<select class="form-control"></select>');
+	CE.department[''] = $('<select class="form-control"></select>');
 	for(let ckey of Object.keys(department_tree)) {
 		let coleopt = $(`<option value="${ckey}">${department_tree[ckey].name}</option>`);
 		colesel$.append(coleopt);
@@ -207,7 +206,7 @@ function initDepartmentSelection() {
 			let deptopt$ = $(`<option value="${dkey}">${depts[dkey].name}</option>`);
 			deptsel$.append(deptopt$);
 		}
-		deptsels[ckey] = deptsel$;
+		CE.department[ckey] = deptsel$;
 	}
 
 	colesel$.on('change', function (event) {
@@ -217,7 +216,7 @@ function initDepartmentSelection() {
 	function onCollegeChanged(college) {
 		$('#deptdiv').empty();
 		if(college !== '')
-			$('#deptdiv').append(deptsels[college]);
+			$('#deptdiv').append(CE.department[college]);
 	}
 }
 
@@ -248,6 +247,9 @@ function initUI() {
 	initTableSorter();
 	resetSearchingForm();
 
+	$('.startSearch')
+		.on('click', doQuery)
+		.prop('disabled', false);
 	// //////////////////////////////////////////////////// //
 	let title_tmp = $('#my_title').text();
 	$('#my_title').mouseover(() => {
@@ -276,21 +278,22 @@ function applyHashQuery() {
 	} else {
 		onSearchChanged();
 	}
+}
 
-	function getHashQuery() {	// get Query from window.location.hash
-		if(!window.location.hash)
-			return undefined;
-		let kvstrs = window.location.hash.substr(1).split('&');
-		let q = {};
-		kvstrs.forEach((e) => {
-			let kv = e.split('=', 2);
-			if(kv.length === 2)
-				q[kv[0]] = decodeURIComponent(kv[1]);
-		});
-		if(window.location.hash)
-			window.history.pushState('', document.title, window.location.pathname);
-		return q;
-	}
+// get Query from window.location.hash
+function getHashQuery() {
+	if(!window.location.hash)
+		return undefined;
+	let kvstrs = window.location.hash.substr(1).split('&');
+	let q = {};
+	kvstrs.forEach((e) => {
+		let kv = e.split('=', 2);
+		if(kv.length === 2)
+			q[kv[0]] = decodeURIComponent(kv[1]);
+	});
+	if(window.location.hash)
+		window.history.pushState('', document.title, window.location.pathname);
+	return q;
 }
 
 async function loadDisclaimer() {
@@ -313,13 +316,9 @@ async function loadDisclaimer() {
 	}
 }
 
-function enableSearching() {
-	$('.startSearch')
-		.on('click', () => doQuery())
-		.prop('disabled', false);
-}
-
 function doQuery() {
+	$('.startSearch').prop('disabled', true);
+
 	let query = collectQuery();
 
 	// close alert
@@ -331,30 +330,25 @@ function doQuery() {
 	result_table_body.empty();
 	result_alert.css('background-color', 'pink').html('搜尋中...').show();
 
+	// filter courses and make courses rows
 	let result_courses = filterCoursesByQuery(Object.values(COURSE_DATA), query);
-	// console.time('processBlock');	// time-consuming sector measurement start
-	makeCourseRows(result_courses, progressQuery, finishQuery);
-
-	function collectQuery() {
-		// get all option of query from ValueSupplier
-		let q = {};
-		filter_options.forEach((e) => {
-			q[e] = VS[e]();
-		});
-		return q;
-	}
-	function progressQuery(curr, all) {
-		result_alert.html(`搜尋中... (${curr}/${all})`);
-	}
-	function finishQuery(trs) {
-		// console.timeEnd('processBlock');	// time-consuming sector measurement end
-		result_alert.hide();
+	makeCourseRows(
+		result_courses,
+		(curr, all) => { result_alert.html(`搜尋中... (${curr}/${all})`); },
+	).then(function (trs) {
 		result_table_body.empty();
-
 		trs.forEach((e) => {
 			result_table_body.append(e);
 		});
+		$('#result_table').trigger('update');
 
+		refreshResultAlert();
+
+		$('.startSearch').prop('disabled', false);
+	});
+
+	function refreshResultAlert(result_alert) {
+		result_alert.hide();
 		if(result_courses.length >= 1000) {
 			result_alert.css('background-color', 'orange')
 				.html('<i>※篩選條件過少可能導致結果筆數太多以致於搜尋/排序速度緩慢，請多加留意※</i>').show();
@@ -362,9 +356,16 @@ function doQuery() {
 			result_alert.css('background-color', 'orange')
 				.html('<i>找不到相符的結果' + (query.category ? '（有可能是使用了類別篩選忘記關閉）' : '') + '</i>').show();
 		}
-
-		$('#result_table').trigger('update');
 	}
+}
+
+function collectQuery() {
+	// get all option of query from ValueSupplier
+	let q = {};
+	filter_options.forEach((e) => {
+		q[e] = VS[e]();
+	});
+	return q;
 }
 
 function onSearchChanged() {
@@ -377,19 +378,20 @@ function onSearchChanged() {
 		(window.location.origin !== 'null' ? window.location.origin : 'file://') +
 		window.location.pathname + getOptionsToHash()
 	);
+}
 
-	function getOptionsToHash() {
-		let strs = {};
-		filter_options.forEach((e) => {
-			strs[e] = VTS[e]();
-		});
-		return '#' + toQueryString(strs);
+function getOptionsToHash() {
+	let strs = {};
+	filter_options.forEach((e) => {
+		strs[e] = VTS[e]();
+	});
+	return '#' + toQueryString(strs);
 
-		function toQueryString(obj) {
-			return Object.keys(obj)
-				.filter((k) => obj[k] !== undefined && obj[k] !== '')
-				.map((k) => k + '=' + encodeURIComponent(obj[k]))
-				.join('&');
-		}
-	}
+}
+
+function toQueryString(obj) {
+	return Object.keys(obj)
+		.filter((k) => obj[k] !== undefined && obj[k] !== '')
+		.map((k) => k + '=' + encodeURIComponent(obj[k]))
+		.join('&');
 }
