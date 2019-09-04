@@ -3,20 +3,23 @@ import $ from 'jquery';
 const course_info_page = 'https://cis.ncu.edu.tw/Course/main/support/courseDetail.html';
 const partition_size = 42;
 
-export default function makeCourseRows(courses, onProgress, onFinished) {
-	let trs = [], i = 0;
-	(function nextBlock() {
-		for(let j = 0; j < partition_size && i < courses.length; j++) {
-			trs[i] = makeCourseRow(courses[i]);
-			i += 1;
-		}
-		onProgress(i, courses.length);
+export default function makeCourseRows(courses, onProgress) {
+	return new Promise((resolve, reject) => {
+		let trs = [], i = 0;
 
-		if(i < courses.length)
-			setTimeout(nextBlock, 0);
-		else
-			onFinished(trs);
-	})();
+		(function nextBlock() {
+			for(let j = 0; j < partition_size && i < courses.length; j++) {
+				trs[i] = makeCourseRow(courses[i]);
+				i += 1;
+			}
+			onProgress(i, courses.length);
+
+			if(i < courses.length)
+				setTimeout(nextBlock, 0);
+			else
+				resolve(trs);
+		})();
+	});
 }
 
 function makeCourseRow(course) {
