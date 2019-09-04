@@ -29,7 +29,7 @@ You must have installed [Node.js](https://nodejs.org/).
 
 Then, use `npm install` in this directory to install all required dependencies.
 
-Edit all the `*.example` files as you need and remove the `.example` suffix.
+Search for `// EDIT ME` in the project and fill up the placeholders.
 
 Developing
 ----------------
