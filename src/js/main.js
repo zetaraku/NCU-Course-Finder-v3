@@ -170,6 +170,9 @@ async function loadCourseData() {
 
 	function preprocessCourseData(course_data) {
 		Object.values(course_data).forEach((course) => {
+			if (course.limitCnt === 0) {
+				course.limitCnt = Infinity;
+			}
 			course.remainCnt = course.limitCnt - course.admitCnt;
 			course.successRate = getRate(course.remainCnt, course.waitCnt);
 			course.fullRate = getRate(course.admitCnt, course.limitCnt);
