@@ -130,8 +130,8 @@ function initTableSorter() {
 			},
 		}).tablesorterPager({
 			container: $('.tspager'),
-			size: 50,
-			output: ' 共找到 {totalRows} 筆結果 目前顯示第 {page}/{totalPages} 頁 ',
+			size: 25,
+			output: ' 共找到 <b>{totalRows}</b> 筆結果，目前顯示第 <b>{page} / {totalPages}</b> 頁 ',
 		});
 }
 
