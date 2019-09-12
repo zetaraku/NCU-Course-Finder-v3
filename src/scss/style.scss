@@ -5,27 +5,27 @@
 	box-sizing: border-box;
 }
 body {
-	padding: 10px;
+	padding: 0;
 }
 th {
 	max-height: 50px !important;
 	font-weight: normal;
 }
-td {
-	padding: 5px !important;
-}
+
 .inline {
 	display: inline;
 }
+
 #ldiv {
+	width: 40%;
+	height: 100vh;
 	float: left;
-	width: 35%;
-	margin: 30px 5px;
 }
 #rdiv {
+	text-align: center;
+	width: 60%;
+	height: 100vh;
 	float: left;
-	width: 62%;
-	margin: 0px 5px;
 }
 
 #my_title {
@@ -39,15 +39,24 @@ td {
 	text-align: center;
 }
 #searching_table {
-	width: 100%;
-	background-color: #DDDDDD;
+	margin: 10px;
 	border: 2px cyan solid;
+
+	td {
+		padding: 10px 20px;
+	}
+
 	td.left {
+		width: auto;
 		text-align: center;
 		background-color: wheat;
+		white-space: nowrap;
 	}
 	td.right {
-		background-color: #FFFFFF;
+		width: 100%;
+		text-align: left;
+		background-color: white;
+		padding: 5px 10px;
 	}
 	td.center {
 		text-align: center;
@@ -84,9 +93,11 @@ td {
 }
 
 #result_table {
-	width: 100%;
-	margin: 0.125%;
-	background-color: #EEEEEE;
+	border-collapse: collapse;
+	width: 95%;
+	margin: 10px;
+	background-color: rgb(233, 195, 195);
+
 	th {
 		height: 40px;
 		text-align: center;
@@ -114,6 +125,9 @@ td {
 			}
 		}
 	}
+	td {
+		padding: 7px;
+	}
 	.hovered-badge {
 		right: 0;
 		background-color: #222222;
@@ -122,7 +136,8 @@ td {
 }
 
 .tspager {
-	margin: 20px 0px;
+	padding: 0;
+	margin: 10px;
 }
 
 .badge-yellow-warning {
@@ -158,19 +173,20 @@ td {
 	max-width: 120px;
 }
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
 	#ldiv {
 		width: 100%;
-		/* float: none; */
-		/* margin: auto; */
+		height: auto;
 	}
 	#rdiv {
 		width: 100%;
+		height: auto;
 	}
 }
+
 @media(max-width: 800px) {
 	.hovered-badge {
-		visibility: hidden;
+		opacity: 0.25;
 	}
 }
 
