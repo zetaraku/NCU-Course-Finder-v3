@@ -1,4 +1,4 @@
-# NCU-Course-Finder
+# NCU-Course-Finder-v3
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/348be8f57877ddbbf86d/maintainability)](https://codeclimate.com/github/zetaraku/NCU-Course-Finder/maintainability)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fzetaraku%2FNCU-Course-Finder?ref=badge_shield)
@@ -6,15 +6,12 @@
 
 A rescue from the place where Nobody Care U.
 
-Demo
-----
-
-[DEMO PAGE](https://ncucf.herokuapp.com/)
+#### :warning: This version is no longer maintained. Please visit the new version: [NCU-Course-Finder-v4](https://github.com/zetaraku/NCU-Course-Finder-v4).
 
 Introduction
 ------------
 
-This is the v3.0 version of NCU-Course-Finder; old versions are no longer maintained.
+This is the v3.0 version of NCU-Course-Finder.
 
 All files are refactored and restructured, the front end now use **webpack**.
 
